@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export class Newsitems extends Component {
+const Newsitems = (props) =>{  
 
-  
-  render() {
-    let {title, description, imageUrl, newsUrl, author , date, source, category} = this.props
+    let {title, description, imageUrl, newsUrl, author , date, source, category} = props
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     let newDate = new Date(date)
     const localDate = new Intl.DateTimeFormat('en-US', {
@@ -44,7 +42,6 @@ export class Newsitems extends Component {
         </div>
       </div>
     )
-  }
 }
 
 export default Newsitems
