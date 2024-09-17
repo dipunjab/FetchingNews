@@ -28,14 +28,19 @@ const News = (props) => {
     props.setProgress(100)
 
   }
+  const captialLetter = (letter)=>{
+      return letter[0].toUpperCase()+ letter.slice(1)
+  }
 
   useEffect(()=>{
+    document.title = `${captialLetter(props.category)}-NewsDo -`
     updateNews()
-  },[]) //it rund after render
+      // eslint-disable-next-line
+  },[]) //it run after render
 
   const fetchMoreData = async () => {
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apikey=${props.apikey}&page=${page+1}&pageSize=${props.pageSize}`
     setpage(page + 1)
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apikey=${props.apikey}&page=${page}&pageSize=${props.pageSize}`
     let data = await fetch(url)
     let parsedData = await data.json()
     
@@ -46,7 +51,7 @@ const News = (props) => {
 
     return (
       <>
-        <h1 className='text-center my-4'>NewsDO - Top Headlines</h1>
+        <h1 className='text-center' style={{ margin: '35px 0px', marginTop: '90px'}}>NewsDO - Top Headlines</h1>
         {loading && <Spinner/>}
 
         <InfiniteScroll
